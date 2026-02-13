@@ -16,6 +16,14 @@ http.createServer((req, res) => {
     res.end();
 }).listen(8080);
 
+setInterval(() => {
+    http.get(`http://localhost:8080`, (res) => {
+        console.log(`Status: ${res.statusCode}`);
+    }).on('error', (err) => {
+        console.error(`[ERROR]: ${err.message}`);
+    });
+}, 300000);
+
 client.on('threadCreate', async (thread) => {
     if (thread.parentId !== CATEGORY_ID && thread.parent?.parentId !== CATEGORY_ID) return;
 
@@ -48,5 +56,6 @@ client.once('ready', () => {
         }
     });
 });
+
 
 client.login(TOKEN);
