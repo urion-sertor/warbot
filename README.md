@@ -3,6 +3,7 @@
 ![Status](https://img.shields.io/badge/Status-Operational-success?style=for-the-badge)
 ![Node.js](https://img.shields.io/badge/Node.js-v20-green?style=for-the-badge&logo=node.js)
 ![Discord.js](https://img.shields.io/badge/Discord.js-v14-blue?style=for-the-badge&logo=discord)
+![Render](https://img.shields.io/badge/Render-Web_Service-cyan?style=for-the-badge&logo=render)
 
 ## 📖 Overview
 This project was developed for the **WARBORN** community, a competitive Game of Thrones-themed Discord server. In high-stakes environments where diplomacy and war coordination involve dozens and even hundreds of users, communication flow management is critical.
@@ -32,4 +33,5 @@ This bot is the first stage of a modular system. Future updates will include:
 3.  **Run:** `npm start`
 
 ---
+
 **Developed by [urion-sertor]** *Currently studying Multi-platform Application Development (DAM).*
