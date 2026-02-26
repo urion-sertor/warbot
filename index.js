@@ -6,56 +6,33 @@ const client = new Client({
 });
 
 const TOKEN = process.env.TOKEN;
-const SEGUNDOS_SLOWMODE = 3600;
 const CATEGORY_ID = '1444360374903247159';
+const PORT = process.env.PORT || 8080; // Render asigns the port automatically
 
-// Servidor HTTP
+// HTTP Server
 http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write("Service Status: Operational");
-    res.end();
-}).listen(8080);
-
-setInterval(() => {
-    http.get(`http://localhost:8080`, (res) => {
-        console.log(`Status: ${res.statusCode}`);
-    }).on('error', (err) => {
-        console.error(`[ERROR]: ${err.message}`);
-    });
-}, 300000);
-
-client.on('threadCreate', async (thread) => {
-    if (thread.parentId !== CATEGORY_ID && thread.parent?.parentId !== CATEGORY_ID) return;
-
-    setTimeout(async () => {
-        try {
-            await thread.setRateLimitPerUser(SEGUNDOS_SLOWMODE);
-            console.log(`[INFO] Applied slowmode to thread: ${thread.name}`);
-        } catch (error) {
-            console.error(`[ERROR] Failed to set slowmode: ${error.message}`);
-        }
-    }, 2500);
+    res.writeHead(200);
+    res.end("Maester Online");
+}).listen(PORT, () => {
+    console.log(`[SYSTEM] HTTP Server listening on port ${PORT}`);
 });
 
 client.once('ready', () => {
-    console.log(`Bot connected as: ${client.user.tag}`);
-    
-    client.guilds.cache.forEach(async (guild) => {
-        try {
-            const threads = await guild.channels.fetchActiveThreads();
-            threads.threads.forEach(async (thread) => {
-                const isInTarget = (thread.parentId === CATEGORY_ID || thread.parent?.parentId === CATEGORY_ID);
-                
-                if (isInTarget && thread.rateLimitPerUser !== SEGUNDOS_SLOWMODE) {
-                    await thread.setRateLimitPerUser(SEGUNDOS_SLOWMODE);
-                    console.log(`[SYNC] Updated: ${thread.name}`);
-                }
-            });
-        } catch (err) {
-            console.error("[ERROR] Sync failed:", err.message);
-        }
-    });
+    console.log(`[AUTH] Bot conectado como ${client.user.tag}`);
 });
 
+client.on('threadCreate', async (thread) => {
+    if (thread.parentId !== CATEGORY_ID && thread.parent?.parentId !== CATEGORY_ID) return;
+    setTimeout(async () => {
+        try {
+            await thread.setRateLimitPerUser(3600);
+            console.log(`[MOD] Slowmode set in ${thread.name}`);
+        } catch (e) { console.error("[ERROR]", e.message); }
+    }, 5000);
+});
 
-client.login(TOKEN);
+if (TOKEN) {
+    client.login(TOKEN).catch(err => console.error("[LOGIN ERROR]", err.message));
+} else {
+    console.error("TOKEN NOT FOUND");
+}
