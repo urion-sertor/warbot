@@ -11,8 +11,8 @@ This project was developed for the **WARBORN** community, a competitive Game of 
 The **WARBOT** serves as an automated moderator, specifically designed to maintain order in diplomatic channels by enforcing precise communication constraints.
 
 ## 🛠️ Problem & Solution
-**The Challenge:** Diplomatic threads were overused in a roleplay scenario where long distance communication is meant to be minimal.
-**The Solution:** An automated system that identifies threads within the **Diplomacy (DIPLO)** jurisdiction and enforces a 1-hour slowmode. This ensures that every message is calculated, formal, and impactful, reflecting the server's lore and strategic nature.
+**The Challenge:** Diplomatic threads were overused in a roleplay scenario where long distance communication is meant to be minimal. They were also a source of unwanted excessive pings for umpires and spectators, as they got pinged in every new diplo thread to be included inside of them.
+**The Solution:** An automated system that identifies threads within the **Diplomacy (DIPLO)** jurisdiction and enforces a 1-hour slowmode. This ensures that every message is calculated, formal, and impactful, reflecting the server's lore and strategic nature. The bot also automatically pings and deletes the ping of umpires and spectators.
 
 ## 🚀 Technical Implementation
 - **Asynchronous Event Handling:** Uses `discord.js` to listen for thread creation in real-time.
@@ -22,16 +22,15 @@ The **WARBOT** serves as an automated moderator, specifically designed to mainta
 
 ## 📈 Roadmap (Future Evolutions)
 This bot is the first stage of a modular system. Future updates will include:
-* **Dynamic Diplomacy:** Integrating an automated "Raven" message that notifies users when a thread is under diplomatic slowmode.
+* **Automatic Silent Ping Umpire and Spectator:** So Umpires and Spectators don't have to get pinged in every new diplo thread.
 * **Role-Based Bypass:** Allowing High Council members to bypass limits for urgent announcements.
-* **Log System:** A dedicated logging channel to track diplomatic activity and bot actions.
-* **Multi-Category Support:** Configurable slowmodes for different regions (Castles, Frontlines, etc.) with unique time constraints.
 
 ## ⚙️ Setup & Deployment
 1.  **Dependencies:** `npm install`
-2.  **Environment:** Requires a `TOKEN` variable and a target `CATEGORY_ID`.
+2.  **Environment:** Requires a `TOKEN` variable, a target `CATEGORY_ID` and two roles `ROLE_SPECTATOR_ID` & `ROLE_UMPIRE_ID`.
 3.  **Run:** `npm start`
 
 ---
 
 **Developed by [urion-sertor]** *Currently studying Multi-platform Application Development (DAM).*
+
