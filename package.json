@@ -1,7 +1,7 @@
 {
   "name": "warbot",
   "version": "1.0.0",
-  "description": "Discord thread management tool",
+  "description": "[ARCHIVED] Discord thread management tool for a concluded community game",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
